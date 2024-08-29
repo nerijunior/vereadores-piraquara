@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Link, Thead, Tbody, Table, Tr, Th, Text, Td } from "@chakra-ui/react";
+import { TableContainer, Link, Thead, Tbody, Table, Tr, Th, Text, Td } from "@chakra-ui/react";
 import { useData } from "@/hooks/useData";
 
 export default function Home() {
@@ -11,8 +11,8 @@ export default function Home() {
   }
 
   return (
-    <>
-        <Table variant="striped">
+    <TableContainer>
+        <Table variant="striped" overflowX='scroll'>
           <Thead>
             <Tr>
               <Th>Vereador</Th>
@@ -132,6 +132,6 @@ export default function Home() {
             ))}
           </Tbody>
         </Table>
-    </>
+    </TableContainer>
   );
 }
