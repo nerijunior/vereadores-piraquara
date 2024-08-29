@@ -1,0 +1,24 @@
+{
+  "name": "vereadores-piraquara",
+  "homepage": "https://nerijunior.github.io/vereadores-piraquara",
+  "version": "0.1.0",
+  "private": false,
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.2.7",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "eslint": "^8",
+    "eslint-config-next": "14.2.7",
+    "gh-pages": "^6.1.1"
+  }
+}
