@@ -45,11 +45,14 @@ export default function Vereador(route) {
         <Card key={assunto}>
           <CardBody>
             <Text>
-              {assunto} - {vereador[assunto]} vezes
+              {assunto} - {vereador[assunto]} vezes - {vereador[`${assunto}_%`]}%
             </Text>
           </CardBody>
         </Card>
       ))}
+
+      <Text>* total de materias publicadas entre 2023 e 2024</Text>
+      <Text>Fonte: Câmara Municipal de Piraquara</Text>
     </Container>
   );
 }
