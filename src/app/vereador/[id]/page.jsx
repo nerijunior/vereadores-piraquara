@@ -2,7 +2,15 @@
 
 import Image from "next/image";
 import { useData } from "@/hooks/useData";
-import { Card, CardBody, Container, Heading, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Card,
+  CardBody,
+  Container,
+  Heading,
+  Link,
+  Text,
+} from "@chakra-ui/react";
 
 export default function Vereador(route) {
   const { id } = route.params;
@@ -29,6 +37,10 @@ export default function Vereador(route) {
 
   return (
     <Container>
+      <Button colorScheme="teal" variant="solid" onClick={() => window.location.href = "/"}>
+        Voltar
+      </Button>
+      
       <Heading>{vereador.vereador}</Heading>
       <Image
         src={`/fotos/${id - 1}.png`}
@@ -45,7 +57,8 @@ export default function Vereador(route) {
         <Card key={assunto}>
           <CardBody>
             <Text>
-              {assunto} - {vereador[assunto]} vezes - {vereador[`${assunto}_%`]}%
+              {assunto} - {vereador[assunto]} vezes - {vereador[`${assunto}_%`]}
+              %
             </Text>
           </CardBody>
         </Card>
@@ -53,6 +66,10 @@ export default function Vereador(route) {
 
       <Text>* total de materias publicadas entre 2023 e 2024</Text>
       <Text>Fonte: Câmara Municipal de Piraquara</Text>
+
+      <Button colorScheme="teal" variant="solid" onClick={() => window.location.href = "/"}>
+        Voltar
+      </Button>
     </Container>
   );
 }
