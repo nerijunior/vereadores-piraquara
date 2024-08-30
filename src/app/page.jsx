@@ -4,17 +4,22 @@ import Image from "next/image";
 import { useData } from "@/hooks/useData";
 
 export default function Home() {
-  const { data } = useData();
+  const { data, assuntos } = useData();
 
   if (!data) {
     return <p>Carregando...</p>;
   }
 
-  window.data = data
+  const totals = data.reduce((acc, row) => {
+    assuntos.forEach((assunto) => {
+      acc[assunto] = (parseInt(acc[assunto]) || 0) + parseInt(row[assunto]);
+    });
+    return acc;
+  }, {});
 
   return (
     <div className="p-8">
-      <div className="grid grid-cols-4 gap-4 justify-between">
+      <div className="grid grid-cols-4 gap-4 justify-between mb-4">
         {data.map((row, i) => (
           <div
             key={i}
@@ -69,7 +74,7 @@ export default function Home() {
               </span>
               <div className="flex mt-4 md:mt-6">
                 <a
-                  href={'/vereador/' + (i + 1)}
+                  href={"/vereador/" + (i + 1)}
                   className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Analisar
@@ -84,6 +89,38 @@ export default function Home() {
             </div>
           </div>
         ))}
+      </div>
+
+      <p class="font-bold 2xl mb-4">Totais</p>
+
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" className="px-6 py-3">
+                Assunto
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Qtde Materias
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.keys(totals).map((assunto) => (
+              <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <th
+                  scope="row"
+                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                >
+                  {assunto.split("_").join(" ")}
+                </th>
+                <td className="px-6 py-4">
+                  {totals[assunto]}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

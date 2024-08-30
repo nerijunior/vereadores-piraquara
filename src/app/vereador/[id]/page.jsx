@@ -62,24 +62,13 @@ const assuntosKeywords = {
 
 export default function Vereador(route) {
   const { id } = route.params;
-  const { data } = useData();
+  const { data, assuntos } = useData();
 
   if (!data) {
     return <p>Carregando...</p>;
   }
 
   const vereador = data[id - 1];
-
-  const ignoreColumns = ["total_materias", "vereador"];
-  const assuntos = Object.keys(vereador)
-    .filter(
-      (key) =>
-        !ignoreColumns.includes(key) &&
-        key.indexOf("_%") == -1 &&
-        key.length > 1
-    )
-    .sort((a, b) => vereador[b] - vereador[a])
-    .map((key) => key);
 
   return (
     <div className="p-8">
@@ -155,6 +144,8 @@ export default function Vereador(route) {
         * total de materias publicadas entre 2023 e 2024 - Fonte: Câmara
         Municipal de Piraquara
       </p>
+
+      <p className="text-sm text-gray-500">** Mantendo o mouse em (?) são exibidas as palavras-chave usadas para categoriar as materias</p>
     </div>
   );
 }

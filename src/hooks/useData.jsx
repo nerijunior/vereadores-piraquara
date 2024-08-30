@@ -19,5 +19,16 @@ export function useData() {
       });
   }, []);
 
-  return { data };
+  const ignoreColumns = ["total_materias", "vereador"];
+  const assuntos = data ? Object.keys(data[0])
+    .filter(
+      (key) =>
+        !ignoreColumns.includes(key) &&
+        key.indexOf("_%") == -1 &&
+        key.length > 1
+    )
+    .sort((a, b) => data[0][b] - data[0][a])
+    .map((key) => key) : [];
+
+  return { data, assuntos };
 }
