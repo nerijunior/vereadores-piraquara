@@ -2,15 +2,6 @@
 
 import Image from "next/image";
 import { useData } from "@/hooks/useData";
-import {
-  Button,
-  Card,
-  CardBody,
-  Container,
-  Heading,
-  Link,
-  Text,
-} from "@chakra-ui/react";
 
 export default function Vereador(route) {
   const { id } = route.params;
@@ -33,43 +24,39 @@ export default function Vereador(route) {
     .sort((a, b) => vereador[b] - vereador[a])
     .map((key) => key);
 
-  window.vereador = vereador;
-
   return (
-    <Container>
-      <Button colorScheme="teal" variant="solid" onClick={() => window.location.href = "/"}>
-        Voltar
-      </Button>
+    <div className="p-8">
+      <a href="/" className="inline-flex mb-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Voltar</a>
+
+      <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{vereador.vereador}</h1>
       
-      <Heading>{vereador.vereador}</Heading>
       <Image
         src={`/fotos/${id - 1}.png`}
         alt="Foto vereador"
         width={128}
         height={128}
+        className="rounded-full shadow-lg"
       />
 
-      <Text>Total de materias: {vereador.total_materias}</Text>
+      <p>Total de materias: {vereador.total_materias}</p>
 
-      <Heading size={2}>Assunto mais pautados:</Heading>
+      <h2 size={2}>Assuntos mais pautados:</h2>
 
       {assuntos.map((assunto) => (
-        <Card key={assunto}>
-          <CardBody>
-            <Text>
+        <div key={assunto}>
+          <div>
+            <p>
               {assunto} - {vereador[assunto]} vezes - {vereador[`${assunto}_%`]}
               %
-            </Text>
-          </CardBody>
-        </Card>
+            </p>
+          </div>
+        </div>
       ))}
 
-      <Text>* total de materias publicadas entre 2023 e 2024</Text>
-      <Text>Fonte: Câmara Municipal de Piraquara</Text>
+      <a href="/" className="inline-flex mb-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Voltar</a>
 
-      <Button colorScheme="teal" variant="solid" onClick={() => window.location.href = "/"}>
-        Voltar
-      </Button>
-    </Container>
+      <p className="text-sm text-gray-500">* total de materias publicadas entre 2023 e 2024 - Fonte: Câmara Municipal de Piraquara</p>
+
+    </div>
   );
 }

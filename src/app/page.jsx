@@ -1,137 +1,90 @@
 "use client";
 import { useEffect, useState } from "react";
-import { TableContainer, Link, Thead, Tbody, Table, Tr, Th, Text, Td } from "@chakra-ui/react";
+import Image from "next/image";
 import { useData } from "@/hooks/useData";
 
 export default function Home() {
-  const {data} = useData();
+  const { data } = useData();
 
-  if (!data){
-    return <p>Carregando...</p>
+  if (!data) {
+    return <p>Carregando...</p>;
   }
 
+  window.data = data
+
   return (
-    <TableContainer>
-        <Table variant="striped" overflowX='scroll'>
-          <Thead>
-            <Tr>
-              <Th>Vereador</Th>
-              <Th>Qtde Materias</Th>
-              <Th>saibro</Th>
-              <Th>lombadas</Th>
-              <Th>tapa_buraco</Th>
-              <Th>poda_verde</Th>
-              <Th>iluminacao_publica</Th>
-              <Th>imposto</Th>
-              <Th>mocao</Th>
-              <Th>ruas_asfalto</Th>
-              <Th>limpeza</Th>
-              <Th>onibus</Th>
-              <Th>valeta</Th>
-              <Th>pintura</Th>
-              <Th>calçada</Th>
-              <Th>esgoto</Th>
-              <Th>estacionamento</Th>
-              <Th>sinalizacao</Th>
-              <Th>evento</Th>
-              <Th>semáforo</Th>
-              <Th>solicitacoes</Th>
-              <Th>manutencao</Th>
-              <Th>energia_eletrica</Th>
-              <Th>saude</Th>
-              <Th>desapropriação</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {data.map((row, i) => (
-              <Tr key={i}>
-                <Td>
-                  <Link color='teal.500' href={`/vereador/${i+1}`}>{row.vereador}</Link>
-                </Td>
-                <Td>{row.total_materias}</Td>
-                <Td>
-                  {row.saibro} <Text as="sub">({row["saibro_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.lombadas} <Text as="sub">({row["lombadas_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.tapa_buraco}{" "}
-                  <Text as="sub">({row["tapa_buraco_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.poda_verde}{" "}
-                  <Text as="sub">({row["poda_verde_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.iluminacao_publica}{" "}
-                  <Text as="sub">({row["iluminacao_publica_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.imposto} <Text as="sub">({row["imposto_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.mocao} <Text as="sub">({row["mocao_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.ruas_asfalto}{" "}
-                  <Text as="sub">({row["ruas_asfalto_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.limpeza} <Text as="sub">({row["limpeza_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.onibus} <Text as="sub">({row["onibus_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.valeta} <Text as="sub">({row["valeta_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.pintura} <Text as="sub">({row["pintura_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.calçada} <Text as="sub">({row["calçada_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.esgoto} <Text as="sub">({row["esgoto_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.estacionamento}{" "}
-                  <Text as="sub">({row["estacionamento_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.sinalizacao}{" "}
-                  <Text as="sub">({row["sinalizacao_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.evento} <Text as="sub">({row["evento_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.semáforo} <Text as="sub">({row["semáforo_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.solicitacoes}{" "}
-                  <Text as="sub">({row["solicitacoes_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.manutencao}{" "}
-                  <Text as="sub">({row["manutencao_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.energia_eletrica}{" "}
-                  <Text as="sub">({row["energia_eletrica_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.saude} <Text as="sub">({row["saude_%"]}%)</Text>
-                </Td>
-                <Td>
-                  {row.desapropriação}{" "}
-                  <Text as="sub">({row["desapropriação_%"]}%)</Text>
-                </Td>
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
-    </TableContainer>
+    <div className="p-8">
+      <div className="grid grid-cols-4 gap-4 justify-between">
+        {data.map((row, i) => (
+          <div
+            key={i}
+            className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+          >
+            <div className="flex justify-end px-4 pt-4">
+              <div
+                id="dropdown"
+                className="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+              >
+                <ul className="py-2" aria-labelledby="dropdownButton">
+                  <li>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Edit
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Export Data
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Delete
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="flex flex-col items-center pb-10">
+              <Image
+                src={`/fotos/${i}.png`}
+                alt="Foto vereador"
+                width={128}
+                height={128}
+                className="rounded-full shadow-lg"
+              />
+              <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+                {row.vereador}
+              </h5>
+              <span className="text-sm text-gray-500 dark:text-gray-400">
+                Total de {row.total_materias} materias
+              </span>
+              <div className="flex mt-4 md:mt-6">
+                <a
+                  href={'/vereador/' + (i + 1)}
+                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  Analisar
+                </a>
+                {/* <a
+                  href="#"
+                  className="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                >
+                  Message
+                </a> */}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
