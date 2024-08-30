@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useData } from "@/hooks/useData";
+import { IconHelp } from "@tabler/icons-react"
 
 const assuntosKeywords = {
   saude: "médico|farmácia|Telemedicina|saúde| ubs |FRALDAS ADULTAS",
@@ -128,15 +129,12 @@ export default function Vereador(route) {
                   width="40%"
                   className="px-6 py-4 font-medium text-gray-900 dark:text-white"
                 >
-                  {assunto.split('_').join(' ')}
-                  <p className="text-sm text-gray-500">
-                    {assuntosKeywords[assunto]
+                  <span>{assunto.split('_').join(' ')} <IconHelp size={16} className="inline-flex bg-blue-100 text-blue-800 rounded-full" title={assuntosKeywords[assunto]
                       ? assuntosKeywords[assunto]
                           .split("|")
                           .map((w) => w.toLowerCase())
                           .join(", ")
-                      : ""}
-                  </p>
+                      : ""} /></span>
                 </th>
                 <td className="px-6 py-4">{vereador[assunto]}</td>
                 <td className="px-6 py-4">{vereador[`${assunto}_%`]}</td>
