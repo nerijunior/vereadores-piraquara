@@ -137,7 +137,7 @@ export default function Vereador(route) {
                       : ""} /></span>
                 </th>
                 <td className="px-6 py-4">{vereador[assunto]}</td>
-                <td className="px-6 py-4">{vereador[`${assunto}_%`]}</td>
+                <td className="px-6 py-4">{vereador[`${assunto}_%`]}%</td>
               </tr>
             ))}
           </tbody>
